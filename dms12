@@ -63,3 +63,64 @@ SQL supports that standard arithmetic operators (+, -, *, /).
 Arithmetic between two floats returns a float.
 Arithmetic between a float and an integer returns a float.
 Arithmetic between two integers returns an integer.*/
+
+
+
+//
+SELECT Major_category, AVG(ShareWomen) FROM recent_grads GROUP BY Major_category;
+
+//
+SELECT Major_category, AVG(ShareWomen) FROM recent_grads GROUP BY Major_category;
+
+//
+SELECT Major_category, AVG(Low_wage_jobs) / AVG(Total) AS share_low_wage FROM recent_grads GROUP BY Major_category HAVING share_low_wage > .1;
+
+//
+SELECT ROUND(ShareWomen, 4), Major_category FROM recent_grads LIMIT 10;
+
+//
+SELECT Major_category, ROUND(AVG(College_jobs) / AVG(Total), 3) AS share_degree_jobs FROM recent_grads GROUP BY Major_category HAVING share_degree_jobs < .3;
+
+//
+SELECT Major_category, Cast(SUM(Women) as Float)/Cast(SUM(Total) as Float) SW FROM recent_grads GROUP BY Major_category ORDER BY SW
+
+//
+Computing summary statistics by a unique value in a row:
+
+SELECT SUM(Employed)
+FROM recent_grads
+GROUP BY Major_category;
+
+Filtering results after aggregation:
+
+SELECT Major_category, AVG(Employed) / AVG(Total) AS share_employed 
+FROM recent_grads 
+GROUP BY Major_category 
+HAVING share_employed > 0.8;
+
+Rounding a column to two decimal places:
+
+SELECT Major_category, ROUND(ShareWomen, 2) AS rounded_share_women 
+FROM recent_grads;
+
+Generating information about each column in a table:
+
+PRAGMA TABLE_INFO(recent_grads);
+
+Converting, known as casting, a column to a float type:
+
+SELECT CAST(Women as Float) / CAST(Total as Float) 
+FROM recent_grads;
+
+/*Concepts
+The GROUP BY clause allows you to compute summary statistics by group.
+The HAVING clause filters on the virtual column that GROUP BY generates.
+WHERE filters results before the aggregation, whereas HAVING filters after aggregation.
+The ROUND function rounds the results to desired decimal places.
+PRAGMA TABLE_INFO() returns the type, along with other information for each column.
+The CAST function in SQL converts data from one data type to another. For example, we can use the CAST function to convert numeric data into character string data.
+*/
+
+
+
+
