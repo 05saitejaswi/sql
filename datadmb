@@ -1,0 +1,52 @@
+
+SELECT Major, Major_category, ShareWomen, Unemployment_rate
+FROM recent_grads
+WHERE (Major_category = 'Engineering') AND (ShareWomen > 0.5 OR Unemployment_rate < 0.051);
+
+SELECT Major, ShareWomen, Unemployment_rate FROM recent_grads
+WHERE ShareWomen > 0.3 AND Unemployment_rate < .1
+ORDER BY ShareWomen DESC
+
+SELECT Major_category, Major, Unemployment_rate FROM recent_grads WHERE Major_category='Engineering' OR Major_category='Physical Sciences' ORDER BY Unemployment_rate ASC
+https://s3.amazonaws.com/dq-content/252/sql_components.svg
+
+
+//Returning first 10 rows from a table:
+SELECT *
+FROM recent_grads
+LIMIT 10;
+
+//Filtering return results:
+SELECT Major, Sharwomen
+FROM recent_grads
+WHERE ShareWomen < 0.5;
+
+//Filtering results using multiple criteria:
+SELECT Major, Major_category, Median, ShareWomen 
+FROM recent_grads 
+WHERE ShareWomen > 0.5 AND Median > 50000;
+
+//Filtering results using the OR clause:
+SELECT Major, Median, Unemployed
+FROM recent_grads 
+WHERE Median >= 10000 OR Unemployed <= 1000 
+LIMIT 20;
+
+//Grouping using AND and OR with parentheses:
+SELECT Major, Major_category, ShareWomen, Unemployment_rate
+FROM recent_grads
+WHERE (Major_category = 'Engineering') AND (ShareWomen > 0.5 OR Unemployment_rate < 0.051);
+
+//Sorting results
+SELECT Major, ShareWomen, Unemployment_rate 
+FROM recent_grads
+WHERE ShareWomen > 0.3 AND Unemployment_rate < 0.1
+ORDER BY ShareWomen DESC;
+
+
+
+A database is a data representation that lives on disk, and can be queried, accessed, and updated without using much memory.
+
+A database management system (DBMS) can be used to interact with a database. Examplees include Postgres and SQLite. SQLitte is the most popular database in the world and is lightweight enough that the SQLite DBMS is included as a module in Python.
+
+To work with data stored in a database, we instead use a language called SQL (or structured query language).
